@@ -1,11 +1,13 @@
+
 import java.time.LocalDateTime;
 
-public class Recharge_event {
+public class Rechargin_event {
+
     private LocalDateTime date;
-    private Charging_station station;
+    private Chargin_station station;
     private double energyCharged;
 
-    public Recharge_event(LocalDateTime date, Charging_station station, double energyCharged) {
+    public Rechargin_event(LocalDateTime date, Chargin_station station, double energyCharged) {
         this.date = date;
         this.station = station;
         this.energyCharged = energyCharged;
@@ -15,7 +17,7 @@ public class Recharge_event {
         return date;
     }
 
-    public Charging_station getStation() {
+    public Chargin_station getStation() {
         return station;
     }
 
@@ -25,10 +27,10 @@ public class Recharge_event {
 
     @Override
     public String toString() {
-        return "RechargeEvent{" +
-                "date=" + date +
-                ", station=" + station.getStation_location() +
-                ", energyCharged=" + energyCharged + " kWh" +
-                '}';
+        return "RechargeEvent{"
+                + "date=" + date
+                + ", station=" + station.getStation_location()
+                + ", energyCharged=" + energyCharged + " kWh"
+                + '}';
     }
 }
