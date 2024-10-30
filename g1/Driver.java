@@ -1,18 +1,27 @@
-//here is the class for the driver, name, id, license and experience are the attributes
-//experience gonna be a b*tch do make, cuz is three possible outcomes: starter, mid and advanced
-//shit's gonna be a bunch of if else statements lol, gotta do what gotta do some times 
+//Here is the class for the Drivers, name, id, license and experience are the attributes.
+//Experience has three possible levels: Beginner, Intermediate and Expert.
+//All 3 are defined by switch case usage, 1 = Beginner; 2 = Intermediate; 3 = Expert.
 
-public class Driver{
+public class Driver {
+
     protected String driver_name;
     protected int driver_id;
     protected String driver_license;
-    protected String driver_experience; //pay attention to this one
+    protected String driver_experience; //Experience is defined as a String.
 
-    public Driver(String driver_experience, int driver_id, String driver_license, String driver_name) {
-        this.driver_experience = driver_experience;
+    public Driver(String driver_name, int driver_id, String driver_license, int exp) {
+        this.driver_name = driver_name;
         this.driver_id = driver_id;
         this.driver_license = driver_license;
-        this.driver_name = driver_name;
+        //But the constructor receives an integer to define the experience level of the driver.
+        switch (exp) {
+            case 1 ->
+                this.driver_experience = "Beginner";
+            case 2 ->
+                this.driver_experience = "Intermediate";
+            case 3 ->
+                this.driver_experience = "Expert";
+        }
     }
 
     public String getDriver_name() {
@@ -43,12 +52,19 @@ public class Driver{
         this.driver_license = driver_license;
     }
 
-    public void setDriver_experience(String driver_experience) {
-        this.driver_experience = driver_experience;
+    public void setDriver_experience(int exp) {
+        switch (exp) {
+            case 1 ->
+                this.driver_experience = "Beginner";
+            case 2 ->
+                this.driver_experience = "Intermediate";
+            case 3 ->
+                this.driver_experience = "Expert";
+        }
     }
 
-    @Override   
-    public String toString(){
+    @Override
+    public String toString() {
         return "Driver name: " + driver_name + "\nDriver ID: " + driver_id + "\nDriver license: " + driver_license + "\nDriver experience: " + driver_experience;
     }
 }
