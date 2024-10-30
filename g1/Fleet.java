@@ -15,6 +15,18 @@ public class Fleet {
         stations = new ArrayList<>();
     }
 
+    public List getCars() {
+        return cars;
+    }
+
+    public List getDrivers() {
+        return drivers;
+    }
+
+    public List getCharginStations() {
+        return stations;
+    }
+
     public void addCar(Default_car_specs car) {
         cars.add(car);
     }
