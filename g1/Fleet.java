@@ -1,13 +1,13 @@
-//the fleet is just 3 arraylists for all the classes
-//add, remove, print
-//do whaterver
+//The Fleet class uses 3 arraylists for all the classes.
+//You can Add, Remove and List the content of all the classes.
 
 import java.util.*;
 
 public class Fleet {
+
     private List<Default_car_specs> cars;
     private List<Driver> drivers;
-    private List<Charging_station> stations;
+    private List<Chargin_station> stations;
 
     public Fleet() {
         cars = new ArrayList<>();
@@ -45,17 +45,17 @@ public class Fleet {
         }
     }
 
-    public void addChargingStation(Charging_station station) {
+    public void addChargingStation(Chargin_station station) {
         stations.add(station);
     }
 
-    public void removeChargingStation(Charging_station station) {
+    public void removeChargingStation(Chargin_station station) {
         stations.remove(station);
     }
 
     public void printChargingStations() {
         System.out.println("Charging Stations:");
-        for (Charging_station station : stations) {
+        for (Chargin_station station : stations) {
             System.out.println(station);
         }
     }
