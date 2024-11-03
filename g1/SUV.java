@@ -14,7 +14,8 @@ public class SUV extends Default_car_specs {
         return chargin_time_suv;
     }
 
-    public void setChargin_time_suv(double chargin_time_suv) {
+    public void setChargin_time_suv() {
         this.chargin_time_suv = 8;
     }
+
 }
