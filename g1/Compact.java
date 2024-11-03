@@ -15,7 +15,7 @@ public class Compact extends Default_car_specs {
         return chargin_time_compact;
     }
 
-    public void setChargin_time_compact(double chargin_time_compact) {
+    public void setChargin_time_compact() {
         this.chargin_time_compact = 4;
     }
 }
