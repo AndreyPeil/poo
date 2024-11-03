@@ -8,6 +8,7 @@ public class Default_car_specs {
     protected int car_fabrication_year;
     protected double car_battery_capacity;
     protected double car_max_range;
+    protected double car_max_capacity; // Capacidade total da bateria
 
     public Default_car_specs(int identifier, String car_brand, String car_model, int car_fabrication_year, double car_battery_capacity, double car_max_range) {
         this.identifier = identifier;
@@ -15,6 +16,7 @@ public class Default_car_specs {
         this.car_model = car_model;
         this.car_fabrication_year = car_fabrication_year;
         this.car_battery_capacity = car_battery_capacity;
+        this.car_max_capacity = car_battery_capacity; // Inicializa a capacidade máxima como o valor total da bateria
         this.car_max_range = car_max_range;
     }
 
@@ -71,12 +73,8 @@ public class Default_car_specs {
         setCar_battery_capacity(newAutonomy);
     }
 
-    public void recharge(double energy) {
-        if (this.car_battery_capacity + energy <= getCar_battery_capacity()) {
-            this.car_battery_capacity += energy;
-        } else {
-            this.car_battery_capacity = getCar_battery_capacity();
-        }
+   public void recharge(double energy) {
+        this.car_battery_capacity = Math.min(this.car_battery_capacity + energy, car_max_capacity);
     }
 
     @Override
