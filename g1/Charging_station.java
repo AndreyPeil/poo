@@ -1,14 +1,14 @@
 //This one is extremely important for the functioning of electrical cars, the Charging Station class.
 //Every station can charge any car type from the system, but they all also have a limit of cars they can charge at the same time.
 
-public class Chargin_station {
+public class Charging_station {
 
     protected int station_id;
     protected String station_location;
     protected int station_capacity;
     protected double station_charging_time;
 
-    public Chargin_station(int station_id, String station_location, int station_capacity, double station_charging_time) {
+    public Charging_station(int station_id, String station_location, int station_capacity, double station_charging_time) {
         this.station_id = station_id;
         this.station_location = station_location;
         this.station_capacity = station_capacity;
