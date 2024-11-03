@@ -13,7 +13,8 @@ public class Sedan extends Default_car_specs {
         return chargin_time_sedan;
     }
 
-    public void setChargin_time_sedan(double chargin_time_sedan) {
+    public void setChargin_time_sedan() {
         this.chargin_time_sedan = 6;
     }
+
 }
