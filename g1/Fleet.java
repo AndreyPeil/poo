@@ -7,7 +7,7 @@ public class Fleet {
 
     private List<Default_car_specs> cars;
     private List<Driver> drivers;
-    private List<Chargin_station> stations;
+    private List<Charging_station> stations;
 
     public Fleet() {
         cars = new ArrayList<>();
@@ -28,11 +28,19 @@ public class Fleet {
     }
 
     public void addCar(Default_car_specs car) {
+
         cars.add(car);
+
+        System.out.println("Car added to the fleet.");
+
     }
 
-    public void removeCar(Default_car_specs car) {
-        cars.remove(car);
+    public void removeCar(int carId) {
+        cars.removeIf(car -> car.getIdentifier() == carId);
+    }
+
+    public void removeDriver(int driverId) {
+        drivers.removeIf(driver -> driver.getDriver_id() == driverId);
     }
 
     public void printFleet() {
@@ -57,17 +65,17 @@ public class Fleet {
         }
     }
 
-    public void addChargingStation(Chargin_station station) {
+    public void addChargingStation(Charging_station station) {
         stations.add(station);
     }
 
-    public void removeChargingStation(Chargin_station station) {
-        stations.remove(station);
-    }
+    public void removeStation(int stationId) {
+    stations.removeIf(station -> station.getStation_id() == stationId);
+}
 
     public void printChargingStations() {
         System.out.println("Charging Stations:");
-        for (Chargin_station station : stations) {
+        for (Charging_station station : stations) {
             System.out.println(station);
         }
     }
