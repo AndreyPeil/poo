@@ -8,7 +8,7 @@ public class Trip {
     private Default_car_specs car;
     private double mileage;
     private String destination;
-    private List<Chargin_station> plannedStations;
+    private List<Charging_station> plannedStations;
     private double remainingDistance;
 
     public Trip(Driver driver, Default_car_specs car, double mileage, String destination) {
@@ -20,23 +20,19 @@ public class Trip {
         this.remainingDistance = mileage;
     }
 
-    public void verifyTrip(List<Chargin_station> availableStations) {
+    public void verifyTrip(List<Charging_station> availableStations) {
         if (car.getCar_max_range() < mileage) {
             System.out.println("The car does not have enough battery to make the trip without stopping to recharge.");
-
-            // Calculates the number of stops necessary.
             int numberOfStations = (int) Math.ceil(mileage / car.getCar_max_range());
-
             planChargingStations(availableStations, numberOfStations, remainingDistance);
         } else {
             System.out.println("The car has enough battery to make the trip without stopping to recharge.");
         }
     }
-
-    private void planChargingStations(List<Chargin_station> availableStations, int numberOfStations, double remainingDistance) {
+    private void planChargingStations(List<Charging_station> availableStations, int numberOfStations, double remainingDistance) {
         double requiredRange = car.getCar_max_range();
 
-        for (Chargin_station station : availableStations) {
+        for (Charging_station station : availableStations) {
             if (remainingDistance <= 0) {
                 break;
             }
@@ -63,7 +59,7 @@ public class Trip {
             car.updateAutonomy(mileage);
             remainingDistance = 0;
         } else {
-            for (Chargin_station station : plannedStations) {
+            for (Charging_station station : plannedStations) {
                 if (remainingDistance <= 0) {
                     break;
                 }
