@@ -28,28 +28,28 @@ public class Driver {
         return driver_name;
     }
 
-    public int getDriver_id() {
-        return driver_id;
-    }
-
-    public String getDriver_license() {
-        return driver_license;
-    }
-
-    public String getDriver_experience() {
-        return driver_experience;
-    }
-
     public void setDriver_name(String driver_name) {
         this.driver_name = driver_name;
+    }
+
+    public int getDriver_id() {
+        return driver_id;
     }
 
     public void setDriver_id(int driver_id) {
         this.driver_id = driver_id;
     }
 
+    public String getDriver_license() {
+        return driver_license;
+    }
+
     public void setDriver_license(String driver_license) {
         this.driver_license = driver_license;
+    }
+
+    public String getDriver_experience() {
+        return driver_experience;
     }
 
     public void setDriver_experience(int exp) {
@@ -67,4 +67,5 @@ public class Driver {
     public String toString() {
         return "Driver name: " + driver_name + "\nDriver ID: " + driver_id + "\nDriver license: " + driver_license + "\nDriver experience: " + driver_experience;
     }
+
 }
