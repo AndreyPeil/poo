@@ -22,6 +22,11 @@ public class Main {
                 System.out.println("7. Add Charging Station.");
                 System.out.println("8. Remove Charging Station.");
                 System.out.println("9. List Charging Stations.");
+                System.out.println("10. Register Trip.");
+                System.out.println("11. Report Low Battery Cars.");
+                System.out.println("12. List Driver Trips.");
+                System.out.println("13. View Recharge History.");
+                System.out.println("14. Maintenance Report.");
                 System.out.println("15. Exit.");
                 System.out.print("Choose an option: ");
 
