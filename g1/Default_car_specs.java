@@ -76,13 +76,13 @@ public class Default_car_specs {
         this.car_max_range = car_max_range;
     }
 
-    public void updateAutonomy(double distance) {
-        double newAutonomy = getCar_battery_capacity() - distance;
-        setCar_battery_capacity(newAutonomy);
+    public void updateBattery(double distance) {
+        double battery = getCar_battery_capacity() - distance;
+        setCar_battery_capacity(battery);
     }
 
-    public void recharge(double energy) {
-        this.car_battery_capacity = Math.min(this.car_battery_capacity + energy, car_max_capacity);
+    public void recharge() {
+        this.car_battery_capacity = this.car_max_capacity;
     }
 
     @Override
