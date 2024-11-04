@@ -1,74 +1,85 @@
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Trip {
 
+    private int tripId;
     private Driver driver;
     private Default_car_specs car;
-    private double mileage;
     private String destination;
-    private List<Charging_station> plannedStations;
-    private double remainingDistance;
+    private double distance;
+    private List<Charging_station> chargingStops;
+    private LocalDateTime date;
 
-    public Trip(Driver driver, Default_car_specs car, double mileage, String destination) {
+    public Trip(int tripId, Driver driver, Default_car_specs car, String destination, double distance) {
+        this.tripId = tripId;
         this.driver = driver;
         this.car = car;
-        this.mileage = mileage;
         this.destination = destination;
-        this.plannedStations = new ArrayList<>();
-        this.remainingDistance = mileage;
+        this.distance = distance;
+        this.date = LocalDateTime.now();
+        this.chargingStops = new ArrayList<>();
     }
 
-    public void verifyTrip(List<Charging_station> availableStations) {
-        if (car.getCar_max_range() < mileage) {
-            System.out.println("The car does not have enough battery to make the trip without stopping to recharge.");
-            int numberOfStations = (int) Math.ceil(mileage / car.getCar_max_range());
-            planChargingStations(availableStations, numberOfStations, remainingDistance);
-        } else {
-            System.out.println("The car has enough battery to make the trip without stopping to recharge.");
-        }
-    }
-    private void planChargingStations(List<Charging_station> availableStations, int numberOfStations, double remainingDistance) {
-        double requiredRange = car.getCar_max_range();
-
-        for (Charging_station station : availableStations) {
-            if (remainingDistance <= 0) {
-                break;
-            }
-
-            if (remainingDistance > requiredRange) {
-                plannedStations.add(station);
-                remainingDistance -= requiredRange;
-                System.out.println("Planned stop at " + station.getStation_location()
-                        + " | Remaining distance: " + remainingDistance + " km");
-            } else {
-                System.out.println("Trip planning complete. Final destination can be reached.");
-                break;
-            }
-        }
-
-        if (remainingDistance > 0) {
-            System.out.println("Warning: Not enough charging stations to complete the trip.");
-        }
+    public void addChargingStop(Charging_station station) {
+        chargingStops.add(station);
     }
 
-    public void startTrip() {
-        if (plannedStations.isEmpty() && car.getCar_battery_capacity() >= mileage) {
-            System.out.println("Trip started without planned stops.");
-            car.updateAutonomy(mileage);
-            remainingDistance = 0;
-        } else {
-            for (Charging_station station : plannedStations) {
-                if (remainingDistance <= 0) {
-                    break;
-                }
+    public int getTripId() {
+        return tripId;
+    }
 
-                System.out.println("Stopping at " + station.getStation_location() + " to charge.");
-                car.recharge(station.getStation_charging_time());
-                remainingDistance -= car.getCar_max_range();
-            }
-            System.out.println("Trip complete. Final destination reached.");
-        }
+    public void setTripId(int tripId) {
+        this.tripId = tripId;
+    }
+
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver = driver;
+    }
+
+    public Default_car_specs getCar() {
+        return car;
+    }
+
+    public void setCar(Default_car_specs car) {
+        this.car = car;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    public List<Charging_station> getChargingStops() {
+        return chargingStops;
+    }
+
+    public void setChargingStops() {
+        this.chargingStops = new ArrayList<>();
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate() {
+        this.date = LocalDateTime.now();
     }
 }
