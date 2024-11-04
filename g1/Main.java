@@ -22,7 +22,7 @@ public class Main {
                 System.out.println("7. Add Charging Station.");
                 System.out.println("8. Remove Charging Station.");
                 System.out.println("9. List Charging Stations.");
-                System.out.println("404. Exit.");
+                System.out.println("15. Exit.");
                 System.out.print("Choose an option: ");
 
                 int choice = scanner.nextInt();
@@ -103,7 +103,61 @@ public class Main {
                     case 9 -> {
                         fleet.printChargingStations();
                     }
-                    case 404 -> {
+                    case 10 -> {
+                        System.out.print("Enter driver ID: ");
+                        int driverId = scanner.nextInt();
+                        Driver driver = fleet.getDriverById(driverId);
+
+                        if (driver == null) {
+                            System.out.println("Driver not found.");
+                            break;
+                        }
+
+                        System.out.print("Enter car ID: ");
+                        int carId = scanner.nextInt();
+                        Default_car_specs car = fleet.getCarById(carId);
+
+                        if (car == null) {
+                            System.out.println("Car not found.");
+                            break;
+                        }
+
+                        System.out.print("Enter destination: ");
+                        scanner.nextLine(); // Consume newline
+                        String destination = scanner.nextLine();
+
+                        System.out.print("Enter trip distance: ");
+                        double distance = scanner.nextDouble();
+
+                        fleet.registerTrip(driver, car, destination, distance);
+                    }
+
+                    case 11 ->
+                        fleet.reportLowBatteryCars();
+
+                    case 12 -> {
+                        System.out.print("Enter driver ID to list trips: ");
+                        int driverId = scanner.nextInt();
+                        fleet.listDriverTrips(driverId);
+                    }
+
+                    case 13 -> {
+                        System.out.print("Enter car ID to view recharge history: ");
+                        int carId = scanner.nextInt();
+                        Default_car_specs car = fleet.getCarById(carId);
+
+                        if (car == null) {
+                            System.out.println("Car not found.");
+                            break;
+                        }
+
+                        fleet.rechargeHistory(car);
+                    }
+
+                    case 14 ->
+                        fleet.maintenanceReport();
+
+                    case 15 -> {
                         running = false;
                         break;
                     }
