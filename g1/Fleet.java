@@ -8,11 +8,15 @@ public class Fleet {
     private List<Default_car_specs> cars;
     private List<Driver> drivers;
     private List<Charging_station> stations;
+    private List<Trip> trips;
+    private List<Recharging_event> rechargeEvents;
 
     public Fleet() {
         this.cars = new ArrayList<>();
         this.drivers = new ArrayList<>();
         this.stations = new ArrayList<>();
+        this.trips = new ArrayList<>();
+        this.rechargeEvents = new ArrayList<>();
     }
 
     public List getCars() {
@@ -87,4 +91,72 @@ public class Fleet {
         }
     }
 
+    public void registerTrip(Driver driver, Default_car_specs car, String destination, double distance) {
+        // Use TripPlanner to calculate charging stops
+        List<Charging_station> stops = Trip_planner.planChargingStops(car, distance, stations);
+
+        // Check if any stops are available and the car has enough range for the trip
+        if (stops.isEmpty() && car.getCar_battery_capacity() < distance) {
+            System.out.println("Insufficient range for the trip.");
+            return;
+        }
+
+        // Create a new Trip instance
+        Trip trip = new Trip(trips.size(), driver, car, destination, distance);
+
+        // Register each charging stop as a Recharging_event
+        for (Charging_station stop : stops) {
+            trip.addChargingStop(stop);
+
+            // Create a recharging event for this stop and add it to the list
+            Recharging_event rechargeEvent = new Recharging_event(stop, car);
+            rechargeEvents.add(rechargeEvent);
+
+            // Update car battery capacity after each stop
+            car.recharge();
+        }
+
+        // Deduct battery capacity based on distance traveled
+        car.updateBattery(distance);
+
+        // Add trip to the trip history
+        trips.add(trip);
+    }
+
+    public void reportLowBatteryCars() {
+        System.out.println("Cars with less than 20% battery:");
+        for (Default_car_specs car : cars) {
+            if (car.getCar_battery_capacity() < 0.2 * car.getCar_max_capacity()) {
+                System.out.println(car);
+            }
+        }
+    }
+
+    public void listDriverTrips(int driverId) {
+        System.out.println("Trips for Driver ID: " + driverId);
+        for (Trip trip : trips) {
+            if (trip.getDriver().getDriver_id() == driverId) {
+                System.out.println(trip);
+            }
+        }
+    }
+
+    public void rechargeHistory(Default_car_specs car) {
+        System.out.println("Recharge history for Car ID: " + car.getIdentifier());
+        for (Recharging_event event : rechargeEvents) {
+            if (event.getCar().getIdentifier() == car.getIdentifier()) {
+                System.out.println(event);
+            }
+        }
+    }
+
+    public void maintenanceReport() {
+        System.out.println("Cars needing maintenance:");
+        for (Default_car_specs car : cars) {
+            if (car.getCar_battery_capacity() < 0.1 * car.getCar_max_capacity()
+                    || car.getCar_fabrication_year() < 2018) {
+                System.out.println(car);
+            }
+        }
+    }
 }
