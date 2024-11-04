@@ -10,26 +10,37 @@ public class Fleet {
     private List<Charging_station> stations;
 
     public Fleet() {
-        this.cars = new ArrayList<>();
-        this.drivers = new ArrayList<>();
-        this.stations = new ArrayList<>();
+        cars = new ArrayList<>();
+        drivers = new ArrayList<>();
+        stations = new ArrayList<>();
     }
 
     public List getCars() {
         return cars;
     }
 
-    public void setCars() {
-        this.cars = new ArrayList<>();
+    public List getDrivers() {
+        return drivers;
+    }
+
+    public List getCharginStations() {
+        return stations;
     }
 
     public void addCar(Default_car_specs car) {
+
         cars.add(car);
+
         System.out.println("Car added to the fleet.");
+
     }
 
     public void removeCar(int carId) {
         cars.removeIf(car -> car.getIdentifier() == carId);
+    }
+
+    public void removeDriver(int driverId) {
+        drivers.removeIf(driver -> driver.getDriver_id() == driverId);
     }
 
     public void printFleet() {
@@ -39,21 +50,12 @@ public class Fleet {
         }
     }
 
-    public List getDrivers() {
-        return drivers;
-    }
-
-    public void setDrivers() {
-        this.drivers = new ArrayList<>();
-    }
-
     public void addDriver(Driver driver) {
         drivers.add(driver);
-        System.out.println("Driver registered.");
     }
 
-    public void removeDriver(int driverId) {
-        drivers.removeIf(driver -> driver.getDriver_id() == driverId);
+    public void removeDriver(Driver driver) {
+        drivers.remove(driver);
     }
 
     public void printDrivers() {
@@ -63,22 +65,13 @@ public class Fleet {
         }
     }
 
-    public List getStations() {
-        return stations;
-    }
-
-    public void setStations() {
-        this.stations = new ArrayList<>();
-    }
-
     public void addChargingStation(Charging_station station) {
         stations.add(station);
-        System.out.println("Charging station registered.");
     }
 
     public void removeStation(int stationId) {
-        stations.removeIf(station -> station.getStation_id() == stationId);
-    }
+    stations.removeIf(station -> station.getStation_id() == stationId);
+}
 
     public void printChargingStations() {
         System.out.println("Charging Stations:");
@@ -86,5 +79,4 @@ public class Fleet {
             System.out.println(station);
         }
     }
-
 }
