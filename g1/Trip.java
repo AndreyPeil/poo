@@ -1,43 +1,28 @@
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Trip {
+
     private Driver driver;
     private Default_car_specs car;
-    private List<Charging_station> availableStations;
     private double mileage;
     private String destination;
+    private List<Charging_station> plannedStations;
     private double remainingDistance;
 
-    public Trip(Driver driver, Default_car_specs car, List<Charging_station> availableStations, double mileage, String destination) {
-        this.car = car;
+    public Trip(Driver driver, Default_car_specs car, double mileage, String destination) {
         this.driver = driver;
-        this.availableStations = availableStations;
+        this.car = car;
         this.mileage = mileage;
         this.destination = destination;
+        this.plannedStations = new ArrayList<>();
         this.remainingDistance = mileage;
-        while (this.remainingDistance > 0 && car.getCar_battery_capacity() < mileage) {
-            this.planRecharge(car, availableStations);
-        }
-        
     }
-
-    public void planRecharge(Default_car_specs car, List<Charging_station> availableStations) {
-        for (Charging_station station : availableStations) {
-            if (station.getCapacity_usage() + 1 > station.getStation_capacity()) {}
-            else {
-                Recharging_event recharge;
-                recharge = new Recharging_event(station, car);
-            }
-            }
-        }
-        
-    }
-
-/*
 
     public void verifyTrip(List<Charging_station> availableStations) {
         if (car.getCar_max_range() < mileage) {
-            
+            System.out.println("The car does not have enough battery to make the trip without stopping to recharge.");
             int numberOfStations = (int) Math.ceil(mileage / car.getCar_max_range());
             planChargingStations(availableStations, numberOfStations, remainingDistance);
         } else {
@@ -87,4 +72,3 @@ public class Trip {
         }
     }
 }
-*/
