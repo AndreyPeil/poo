@@ -159,4 +159,22 @@ public class Fleet {
             }
         }
     }
+
+    public Driver getDriverById(int driverId) {
+        for (Driver driver : drivers) {
+            if (driver.getDriver_id() == driverId) {
+                return driver;
+            }
+        }
+        return null; // Return null if no driver is found with the given ID
+    }
+
+    public Default_car_specs getCarById(int carId) {
+        for (Default_car_specs car : cars) {
+            if (car.getIdentifier() == carId) { // Assuming getIdentifier() returns the car's ID
+                return car;
+            }
+        }
+        return null; // Return null if no car is found with the given ID
+    }
 }
